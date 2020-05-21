@@ -109,7 +109,6 @@
                                 <a href="eliminar.php?Id=<?php echo $row['Id']?>"class="btn btn-danger">
                                 <i class="far fa-trash-alt"></i>
                                 </a>
-                                
                             </td>
                         </tr>
 
