@@ -1,12 +1,11 @@
 <?php
     include("conexion.php");
     if(isset($_GET['Id'])){
-        $id = $_GET['Id'];
+        $Id = $_GET['Id'];
         $query = "SELECT * FROM clientes WHERE Id =$Id";
         $result = mysqli_query($conn, $query);
         if(mysqli_num_rows($result)==1){
             $row = mysqli_fetch_array($result);
-            $Id = $_row['Id'];
             $nombres = $row['nombres'];
             $apellidos = $row['apellidos'];
             $telefono = $row['telefono'];
@@ -17,7 +16,7 @@
     }
     if(isset($_POST['update'])){
         
-        $Id = $_POST['Id'];
+        $Id = $_GET['Id'];
         $nombres = $_POST['nombres'];
         $apellidos = $_POST['apellidos'];
         $telefono = $_POST['telefono'];
@@ -28,9 +27,9 @@
         direccion = '$direccion', correo_electronico = '$correo_electronico' WHERE Id = $Id";
         mysqli_query($conn, $query);
 
-        $_SESSION['message'] = 'Dato Actualizado Correctamente';
+        $_SESSION['message'] = 'Datos Actualizado Correctamente';
         $_SESSION['message_type']="danger";
-        header("Location: crud.php");
+        header("Location: index.php");
 
     }
 ?>
@@ -39,28 +38,31 @@
     <div class="row">
         <div class="col-md-4 mx-auto">
             <div class="card card-body">
-                <form action="editar.php?id=<?php echo $_GET['id']; ?>"method="POST">
+                <form action="editar.php?Id=<?php echo $_GET['Id']; ?>"method="POST">
+
                     <div class="form-group">
                         <input type="text" name="nombres" value="<?php echo $nombres; ?>"
                         class="form-control" placeholder="Actualizar Nombres">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="apellidos" value="<?php echo $apelliods; ?>"
-                        class="form-control" placeholder="Actualizar Apellidos">
+                        <input type="text" name="apellidos" value="<?php echo $apellidos; ?>"
+                        class="form-control" placeholder="Actualizar Apellido">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="nombres" value="<?php echo $; ?>"
-                        class="form-control" placeholder="Update Title">
+                        <input type="text" name="telefono" value="<?php echo $telefono; ?>"
+                        class="form-control" placeholder="Actualizar Telefono">
                     </div>
 
-
-
+                    <div class="form-group">
+                        <input type="text" name="direccion" value="<?php echo $direccion; ?>"
+                        class="form-control" placeholder="Actualizar Direccion">
+                    </div>
 
                     <div class="form-group">
-                        <textarea name="description" rows="2" class="form-control" placeholder="Update 
-                        Description"> <?php echo $description; ?></textarea>
+                        <textarea name="correo_electronico" rows="2" class="form-control" placeholder="Actualizar
+                        correo"> <?php echo $correo_electronico; ?></textarea>
 
                     </div>
                     <button class="btn btn-success" name="update">
@@ -75,3 +77,4 @@
     </div>
 
 </div>
+<?php include("includes/footer.php")?>
